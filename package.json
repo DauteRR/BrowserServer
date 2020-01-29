@@ -24,6 +24,10 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "@types/mongoose": "^5.7.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.10"
   }
 }
