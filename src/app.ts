@@ -19,7 +19,7 @@ function main() {
 
   app.post('/search', async (req, res) => {
     const result = await db.Search(req.body as SearchParameters);
-    res.send(JSON.stringify({ results: result.map(result => result.title) }));
+    res.send(JSON.stringify(result.map(result => result.title)));
   });
 
   app.listen(3001, err => {

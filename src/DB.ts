@@ -3,6 +3,7 @@ import WebpageModel, { IWebpage } from './Webpage.model';
 
 export interface SearchParameters {
   text: string;
+  limit: number;
 }
 
 export class Database {
@@ -31,10 +32,12 @@ export class Database {
   }
 
   Search(parameters: SearchParameters): DocumentQuery<IWebpage[], IWebpage, {}> {
-    const { text } = parameters;
-    return WebpageModel.find({ $text: { $search: text } }, { score: { $meta: 'textScore' } }).sort({
-      score: { $meta: 'textScore' }
-    });
+    const { text, limit } = parameters;
+    return WebpageModel.find({ $text: { $search: text } }, { score: { $meta: 'textScore' } })
+      .sort({
+        score: { $meta: 'textScore' }
+      })
+      .limit(limit);
   }
 
   GetRegisteredWebpagesCount(): Query<number> {
