@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { Database } from './DB';
 
-export interface IWebPageHeaders {
+export interface IVisitedHeaders {
   h1?: string[];
   h2?: string[];
   h3?: string[];
@@ -10,7 +9,7 @@ export interface IWebPageHeaders {
   h6?: string[];
 }
 
-export interface IWebPageMeta {
+export interface IVisitedMeta {
   keywords?: string[];
   description?: string;
   author?: string;
@@ -19,17 +18,17 @@ export interface IWebPageMeta {
   organization?: string;
 }
 
-export interface IWebpage extends Document {
+export interface IVisited extends Document {
   title: string;
-  meta: IWebPageMeta;
+  meta: IVisitedMeta;
   content: string;
-  headers: IWebPageHeaders;
+  headers: IVisitedHeaders;
   lastVisited: Date;
   url: string;
   baseDomain: boolean;
 }
 
-const WebpageSchema: Schema = new Schema({
+const VisitedSchema: Schema = new Schema({
   title: { type: String },
   meta: { type: Object },
   content: { type: String },
@@ -39,4 +38,4 @@ const WebpageSchema: Schema = new Schema({
   baseDomain: { type: Boolean }
 });
 
-export default mongoose.model<IWebpage>('Webpage', WebpageSchema, 'visited');
+export default mongoose.model<IVisited>('Visited', VisitedSchema, 'visited');

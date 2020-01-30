@@ -1,5 +1,7 @@
 import mongoose, { Connection, Query, DocumentQuery } from 'mongoose';
-import WebpageModel, { IWebpage } from './Webpage.model';
+import VisitedModel, { IVisited } from './models/Visited.model';
+import NotVisitedModel from './models/NotVisited.model';
+import ErrorModel from './models/Error.model';
 
 export interface SearchParameters {
   text: string;
@@ -31,17 +33,25 @@ export class Database {
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
   }
 
-  Search(parameters: SearchParameters): DocumentQuery<IWebpage[], IWebpage, {}> {
+  Search(parameters: SearchParameters): DocumentQuery<IVisited[], IVisited, {}> {
     const { text } = parameters;
-    return WebpageModel.find({ $text: { $search: text } }, { score: { $meta: 'textScore' } })
+    return VisitedModel.find({ $text: { $search: text } }, { score: { $meta: 'textScore' } })
       .sort({
         score: { $meta: 'textScore' }
       })
       .limit(50);
   }
 
-  GetRegisteredWebpagesCount(): Query<number> {
-    return WebpageModel.countDocuments();
+  GetVisitedWebpagesCount(): Query<number> {
+    return VisitedModel.countDocuments();
+  }
+
+  GetNotVisitedWebpagesCount(): Query<number> {
+    return NotVisitedModel.countDocuments();
+  }
+
+  GetErrorWebpagesCount(): Query<number> {
+    return ErrorModel.countDocuments();
   }
 }
 

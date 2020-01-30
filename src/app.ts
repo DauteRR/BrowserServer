@@ -12,13 +12,11 @@ function main() {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 
-  app.get('/', async (req, res) => {
-    const count = await db.GetRegisteredWebpagesCount();
-    res.send(`Browser server: ${count} pages registered`);
-  });
-
   app.get('/ping', async (req, res) => {
-    res.send(JSON.stringify({ ping: 'pong' }));
+    const visitedCount = await db.GetVisitedWebpagesCount();
+    const notVisitedCount = await db.GetNotVisitedWebpagesCount();
+    const errorCount = await db.GetErrorWebpagesCount();
+    res.send(JSON.stringify({ ping: 'pong', visitedCount, notVisitedCount, errorCount }));
   });
 
   app.post('/search', async (req, res) => {
