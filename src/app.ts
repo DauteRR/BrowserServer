@@ -17,9 +17,23 @@ function main() {
     res.send(`Browser server: ${count} pages registered`);
   });
 
+  app.get('/ping', async (req, res) => {
+    res.send(JSON.stringify({ ping: 'pong' }));
+  });
+
   app.post('/search', async (req, res) => {
-    const result = await db.Search(req.body as SearchParameters);
-    res.send(JSON.stringify(result.map(result => result.title)));
+    const results = await db.Search(req.body as SearchParameters);
+    res.send(
+      JSON.stringify(
+        results.map(result => ({
+          url: result.url,
+          title: result.title,
+          content: result.content.substr(0, 100),
+          lastVisited: result.lastVisited,
+          meta: result.meta
+        }))
+      )
+    );
   });
 
   app.listen(3001, err => {

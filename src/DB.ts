@@ -32,12 +32,12 @@ export class Database {
   }
 
   Search(parameters: SearchParameters): DocumentQuery<IWebpage[], IWebpage, {}> {
-    const { text, limit } = parameters;
+    const { text } = parameters;
     return WebpageModel.find({ $text: { $search: text } }, { score: { $meta: 'textScore' } })
       .sort({
         score: { $meta: 'textScore' }
       })
-      .limit(limit);
+      .limit(100);
   }
 
   GetRegisteredWebpagesCount(): Query<number> {
