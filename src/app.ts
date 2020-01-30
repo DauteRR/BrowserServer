@@ -28,7 +28,6 @@ function main() {
         results.map(result => ({
           url: result.url,
           title: result.title,
-          content: result.content.substr(0, 100),
           lastVisited: result.lastVisited,
           meta: result.meta
         }))

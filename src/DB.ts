@@ -37,7 +37,7 @@ export class Database {
       .sort({
         score: { $meta: 'textScore' }
       })
-      .limit(100);
+      .limit(50);
   }
 
   GetRegisteredWebpagesCount(): Query<number> {
