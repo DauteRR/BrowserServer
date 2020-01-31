@@ -23,6 +23,8 @@ $ npm i
 $ npm start
 ```
 
+After running the commands the server will be ready and listening on localhost:3001
+
 ## About the project
 
 With [BrowserClient](https://github.com/DauteRR/BrowserClient), users are able to search information about registered webpages. The petitions made by [BrowserClient](https://github.com/DauteRR/BrowserClient) are resolved by [BrowserServer](https://github.com/DauteRR/BrowserServer). Webpages information is stored in a _MongoDB_ database using [WebScraper](https://github.com/DauteRR/WebScraper). The database has 3 collections:
