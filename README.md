@@ -1,11 +1,19 @@
 # BrowserServer
 
-Express server for resolving [BrowserClient](https://github.com/DauteRR/BrowserClient)'s petitions. It exposes two endpoints:
+Express server for resolving [BrowserClient](https://github.com/DauteRR/BrowserClient)'s petitions. It was created as a part of the final project of Data Acquisition and Integration subject. [BrowserServer](https://github.com/DauteRR/BrowserServer) exposes two endpoints:
 
 - **/ping**: Needed for connectivity testing and information retrieval. Returns the amount of documents of each _MongoDB_ database collection.
 - **/search**: Expects a text as parameter and returns
 
-It was created as a part of the final project of Data Acquisition and Integration subject.
+By default, [BrowserServer](https://github.com/DauteRR/BrowserServer) limits the results to 100 webpages. The search of the webpages is made using _\$text_ _MongoDB_ query operator and the results are sorted using _textScore_. To be able to perform the searches it was necessary to add a text type index on several fields of the _visited_ collection. Each index field has a weight assigned:
+
+- _title_: 10
+- _meta_
+  - _keywords_: 5
+- _headers_:
+  - _h1_: 3
+  - _h2_: 2
+- _content_: 1
 
 ## Usage
 
@@ -26,6 +34,8 @@ $ npm start
 After running the commands the server will be ready and listening on localhost:3001
 
 ## About the project
+
+<div style="text-align:center;"><img src="media/diagram.png" /></div>
 
 With [BrowserClient](https://github.com/DauteRR/BrowserClient), users are able to search information about registered webpages. The petitions made by [BrowserClient](https://github.com/DauteRR/BrowserClient) are resolved by [BrowserServer](https://github.com/DauteRR/BrowserServer). Webpages information is stored in a _MongoDB_ database using [WebScraper](https://github.com/DauteRR/WebScraper). The database has 3 collections:
 

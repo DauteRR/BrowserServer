@@ -12,9 +12,14 @@ export class Database {
   static MONGO_PORT: string = process.env.MONGO_PORT || '27017';
   static DB_NAME: string = process.env.DB_NAME || 'websDB';
 
-  db: Connection;
-
-  constructor() {}
+  constructor() {
+    this.Connect()
+      .then(() => console.log('Successful database connection'))
+      .catch(error => {
+        console.log('Error during database connection: ', error);
+        process.exit(1);
+      });
+  }
 
   async Connect() {
     await mongoose
@@ -28,9 +33,7 @@ export class Database {
 
     mongoose.Promise = global.Promise;
 
-    const db = mongoose.connection;
-
-    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+    mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
   }
 
   Search(parameters: SearchParameters): DocumentQuery<IVisited[], IVisited, {}> {

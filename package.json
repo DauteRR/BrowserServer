@@ -4,6 +4,7 @@
   "main": "dist/app.js",
   "repository": "git@github.com:DauteRR/BrowserServer.git",
   "author": "Daute Rodríguez Rodríguez <alu0100973914@ull.edu.es>",
+  "license": "GPL-3.0",
   "private": true,
   "scripts": {
     "start": "tsc && node dist/app.js",
