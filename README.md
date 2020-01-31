@@ -54,7 +54,7 @@ With [BrowserClient](https://github.com/DauteRR/BrowserClient), users are able t
   - _errorType_: Error type
   - _message_: Error message
 
-## Usage
+### Setup
 
 To initialize the database it is necessary to execute [WebScraper](https://github.com/DauteRR/WebScraper) specifying -i or --initialize option:
 
